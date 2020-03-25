@@ -19,7 +19,11 @@ var express 		= require("express"),
 //seedDB();
 ////console.log(__dirname);
 
-mongoose.connect("mongodb://localhost/quiz_show",{useUnifiedTopology:true, useNewUrlParser:true});
+//mongoose.connect("mongodb://localhost/quiz_show",{useUnifiedTopology:true, useNewUrlParser:true});
+mongoose.connect("mongodb+srv://SandAuddy755:ska755dog@cluster0-ywgza.mongodb.net/test?retryWrites=true&w=majority",{
+	useUnifiedTopology:true,
+	useNewUrlParser:true
+});
 
 var app = express();
 
