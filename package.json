@@ -4,7 +4,8 @@
   "description": "This the version of the project in which all the left over backend and styling of a particular page is done (carried out)",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Sandeep Kumar Auddy",
   "license": "ISC",
