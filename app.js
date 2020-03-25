@@ -61,6 +61,6 @@ app.use(mypostsRoutes);
 app.use(mychallengesRoutes);
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-app.listen(3000, "localhost", function(){
+app.listen(process.env.PORT, process.env.IP, function(){
 	console.log("Server is running at PORT: 3000 ...");
 });
