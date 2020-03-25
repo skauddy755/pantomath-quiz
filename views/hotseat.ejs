@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <style type="text/css">
+
+        html
+        {
+            width: 100%;
+            height: 100%;
+        }
+        body
+		{
+            width: 100%;
+            height: 100%;
+			background-image: url(https://66.media.tumblr.com/0461d0396e5b54a5b38d57783205d805/tumblr_nr4q2jMiDq1t2f1h6o1_1280.jpg);
+			background-size: cover;
+			background-position: center;
+			background-attachment: fixed;
+		}
+        #ui
+        {
+            background-color: rgba(100,255,255,0.6);
+            text-align:center
+            
+        }
+        
+	</style>
+</head>
+<body>
+    <!--
+    <h2>QuestIndex = <%= n %></h2>
+    <h6 name="c" id="<%= challengeId %>">.</h6>
+    <h6 name="u" id="<%= currentUserId %>">.</h6>
+    <h6 name="q" id="<%= quesIndex %>">.</h6>
+    
+    <h1><%= currentUser.username %></h1>
+    <hr>
+    <h2><%= ques.statement %></h2><br>
+    <button id="A" class="btn btn-default btn-large btn-block option"><b>A: </b><%= ques.A %></button>
+    <button id="B" class="btn btn-default btn-large btn-block option"><b>B: </b><%= ques.B %></button>
+    <button id="C" class="btn btn-default btn-large btn-block option"><b>C: </b><%= ques.C %></button>
+    <button id="D" class="btn btn-default btn-large btn-block option"><b>D: </b><%= ques.D %></button>
+    <button id="submitAns" class="btn btn-success btn-large btn-block">SUBMIT and NEXT >></button>
+    -->
+
+
+
+    <nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>                        
+			    </button>
+				<a href="/home" class="navbar-brand"><span class="glyphicon glyphicon-king" aria-hidden="true"></span> PANTOMATH</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="#">About</a></li>
+				<li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Users</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+
+				<% if(!currentUser){ %>
+					<li><a href="/register"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Signup</a></li>
+					<li><a href="/login"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
+				<% } else { %>
+					<li><a><b><%= currentUser.username %></b></a></li>
+					<li><a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+				<% } %>
+
+			</ul>
+		</div>
+	</nav>
+    <div class="container">
+		<div class="col-lg-3 col-md-2 col-sm-1 col-xs-0"></div>
+		<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+			<div id="ui" class="jumbotron">
+                <h2><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span></h2>
+                <h2 id="timer"></h2>
+                <h3><strong># ( <%= ((n*1)+1) %> / 5 )</strong></h3><hr>
+                <div class="well">
+                    <h4 style="text-align: left; color: darkgreen;"><%= ques.statement %></h4><hr>
+                    <p id="A" class="btn btn-default btn-large btn-block option"><b>A: </b><%= ques.A %></p>
+                    <p id="B" class="btn btn-default btn-large btn-block option"><b>B: </b><%= ques.B %></p>
+                    <p id="C" class="btn btn-default btn-large btn-block option"><b>C: </b><%= ques.C %></p>
+                    <p id="D" class="btn btn-default btn-large btn-block option"><b>D: </b><%= ques.D %></p>
+                    <button id="submitAns" class="btn btn-success btn-large btn-block">SUBMIT and NEXT >></button>
+                </div>
+            </div>
+		</div>
+		<div class="col-lg-3 col-md-2 col-sm-1 col-xs-0"></div>
+    </div>
+    <h6 name="c" id="<%= challengeId %>">.</h6>
+    <h6 name="u" id="<%= currentUserId %>">.</h6>
+    <h6 name="q" id="<%= quesIndex %>">.</h6>
+
+    <script type="text/javascript">
+
+        //========================= Time-out TASKS ===================================
+        var t = setTimeout(function(){
+            
+            let c = document.getElementsByName("c")[0].id;
+            let u = document.getElementsByName("u")[0].id;
+            let q = document.getElementsByName("q")[0].id;alert("Sorry...TIME-OUT !!!");
+            let ans = "TIMEOUT";
+            let url = "/hotseat/"+c+"/"+u+"/"+q+"/"+ans;
+            window.location.replace(url);
+            /*var req = new Request(url, {
+                method: "GET",
+                //redirect: "follow",
+                //body: data,
+                headers: new Headers()
+            });
+            
+            fetch(req)
+                .then(function(){
+                    console.log("Okay...!!");
+                    window.location.replace(url);
+                })
+                .catch(function(){
+                    console.log("Not Okay...!!");
+                });*/
+        }, 8000);
+        //-------------------------------------------------------------------------------------
+        //alert("xx");
+        //var myId = document.getElementsByTagName("h6")[0].id;
+        var arr = document.getElementsByClassName("option");
+        //alert(arr.length);
+        //console.log(arr.length);
+        //============================ Event-Listening tasks ===================================
+        var index = -1;
+        function fxn()
+        {
+            let arr = document.getElementsByClassName("option");
+            //alert("before : "+this.activated);
+            this.activated = !(this.activated);
+            this.style.backgroundColor = "rgb(160,200,220)";
+            if(index != (-1)){
+                arr[index].activated = !(arr[index].activated);
+                arr[index].style.backgroundColor = "white";
+            }
+            let j;
+            for(j=0; j<arr.length; j++)
+            {
+                if(arr[j].textContent===this.textContent)
+                {
+                    index = j;
+                    break;
+                }
+            }
+            //alert("after : "+this.activated);
+        }
+        function fxnConfirm()
+        {
+            console.log(t);
+            clearTimeout(t);
+            //console.log(t);
+            let arr = document.getElementsByClassName("option");
+            //alert("Okay... u selected:\n"+arr[index].textContent);
+            let c = document.getElementsByName("c")[0].id;
+            let u = document.getElementsByName("u")[0].id;
+            let q = document.getElementsByName("q")[0].id;//alert(q);
+            let ans = arr[index].id;
+            let url = "/hotseat/"+c+"/"+u+"/"+q+"/"+ans;
+            window.location.replace(url);
+            /*let req = new Request(url, {
+                method: "GET",
+                headers: new Headers()
+            });
+            fetch(req)
+                .then(function(){
+                    console.log("Okay...!!");
+                    window.location.replace(url);
+                })
+                .catch(function(){
+                    console.log("Not Okay...!!");
+                });*/
+        }
+        let i;
+        for(i=0; i<arr.length; i++){
+            let id = arr[i].id;
+            arr[i].activated = false;
+            arr[i].addEventListener("click", fxn);
+        }
+        var sub = document.getElementById("submitAns");
+        sub.addEventListener("click", fxnConfirm);
+        //==========================TIMER==================================
+        var timer = document.getElementById("timer");
+        timer.textContent = 8;
+        var tm = setInterval(function(){
+            let x = timer.textContent * 1;
+            x = x-1;
+            timer.textContent = x;
+        }, 1000);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MoreInfo_Yelpcamp</title>
+</head>
+<body>
+    <h1>INDEX :</h1>
+    <h3><%= index %></h3>
+    <hr>
+    <form action="/<%= index %>" method="POST">
+        <input type="text" name="word">
+        <input type="submit" value="SUBMIT">
+    </form>
+    <script type="text/javascript">
+        function fx1(){console.log("Hello");}
+        function fx2(n){console.log("Hello "+n);}
+        //console.log("JS is working...!!");
+        setTimeout(function(){
+            var data = {
+                name: "Sandeep",
+                admno: "19JE0741"
+            };
+            
+            var req = new Request("/log/755", {
+                method: "GET",
+                //redirect: "follow",
+                //body: data,
+                headers: new Headers()
+            });
+            
+
+            fetch(req)
+                .then(function(){
+                    console.log("Okay...!!");
+                    window.location.replace("/log/755");
+                })
+                .catch(function(){
+                    console.log("Not Okay...!!");
+                })
+
+
+
+            /*fetch()
+                .then(fx1)
+                .then(function(res){
+                    console.log(res);
+                })
+                .then(fx2(755));*/
+        }, 5000);
+    </script>
+</body>
+</html>

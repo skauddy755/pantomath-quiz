@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+
+        html
+        {
+            width: 100%;
+            height: 100%;
+        }
+        body
+		{
+            width: 100%;
+            height: 100%;
+			background-image: url(https://www.cnm.org.br/cms/images/stories/comunicacao_novo/educacao/05012016_livros_MRE.jpg);
+			background-size: cover;
+			background-position: center;
+			background-attachment: fixed;
+		}
+        #ui
+        {
+            background-color: rgba(255,160,50,0.68);
+            text-align:center   
+        }
+        .myrow
+        {
+            background-color: rgba(100,190,200,0.68);
+			margin-bottom: 2px;
+        }
+        
+	</style>
+</head>
+<body>
+	<!--
+	<h1><%= currentUser.username %></h1>
+	<a href="/dashboard/<%= currentUser._id %>">Go back to dashboard</a><br>
+    <h1>Okay... Here r ur CHALLENGES</h1>
+	<br>
+	<a href="/<%= currentUser._id %>/mychallenges/new">Create new challenge</a>
+	<br>
+	<h2>Completed Challenges :</h2>
+	<% comp.forEach(function(ch){ %>
+		<h3><%= ch.byName %>  -----  <%= ch.againstName %></h3>
+		<h4>Scores : <%= ch.scoreBy %>  ||  <%= ch.scoreAgainst %></h4><hr>
+	<% }); %>
+	<h2>Incomplete Outgoing Challenges :</h2>
+	<% outgoing.forEach(function(ch){ %>
+		<h3><%= ch.byName %>  -----  <%= ch.againstName %></h3>
+		<h4>Scores : <%= ch.scoreBy %>  ||  <%= ch.scoreAgainst %></h4><hr>
+	<% }); %>
+	<h2>Incomplete Incoming Challenges :</h2>
+	<% incoming.forEach(function(ch){ %>
+		<a href="/<%= currentUser._id %>/mychallenges/existing/<%= ch._id %>" class="btn btn-large btn-default">
+			<h3><%= ch.byName %>  -----  <%= ch.againstName %></h3>
+			<h4>Scores : <%= ch.scoreBy %>  ||  <%= ch.scoreAgainst %></h4><hr>
+		</a>
+		<h4>Scores :</h4><hr>
+	<% }); %>
+	-->
+
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>                        
+			    </button>
+				<a href="/home" class="navbar-brand"><span class="glyphicon glyphicon-king" aria-hidden="true"></span> PANTOMATH</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="#">About</a></li>
+				<li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Users</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+
+				<% if(!currentUser){ %>
+					<li><a href="/register"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Signup</a></li>
+					<li><a href="/login"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
+				<% } else { %>
+					<li><a><b><%= currentUser.username %></b></a></li>
+					<li><a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+				<% } %>
+
+			</ul>
+		</div>
+	</nav>
+    <div class="container">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-10">
+			<div id="ui" class="jumbotron">
+                <div class="container">
+                    <div class="col-lg-1">
+                        <a class="btn btn-small btn-info" id="back" href="/dashboard/<%= currentUser._id %>">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> DASHBOARD
+                        </a>
+                    </div>
+                </div><hr>
+                <h1><strong>MY CHALLENGES</strong></h1>
+                <h4><strong><%= currentUser.username %></strong> See what challenges u have taken...</h4><hr>
+                <a class="btn btn-lg btn-success" href="/<%= currentUser._id %>/mychallenges/new">
+                    NEW CHALLENGE <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </a>
+            </div>
+            <br>
+            <div class="jumbotron" style="background-color: rgba(180,190,200,0.68);">
+				<h2><strong>COMPLETED CHALLENGES :</strong></h2><br>
+				<% comp.forEach(function(ch){ %>
+					<div class="row myrow">
+						<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+							<h3 style="text-align: right;"><strong><%= ch.byName %></strong></h3>
+							<h4 style="text-align: right;"><strong><%= ch.scoreBy %></strong></h4>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+							<h2 style="text-align: center;"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span></h2>
+						</div>
+						<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+							<h3 style="text-align: left;"><strong><%= ch.againstName %></strong></h3>
+							<h4 style="text-align: left;"><strong><%= ch.scoreAgainst %></strong></h4>
+						</div>
+					</div>
+				<% }); %>
+            </div><br>
+            <div class="jumbotron" style="background-color: rgba(180,190,200,0.68);">
+				<h2><strong>INCOMPLETE OUTGOING CHALLENGES :</strong></h2><br>
+				<% outgoing.forEach(function(ch){ %>
+					<div class="row myrow">
+						<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+							<h3 style="text-align: right;"><strong><%= ch.byName %></strong></h3>
+							<h4 style="text-align: right;"><strong><%= ch.scoreBy %></strong></h4>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+							<h2 style="text-align: center;"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span></h2>
+						</div>
+						<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+							<h3 style="text-align: left;"><strong><%= ch.againstName %></strong></h3>
+						</div>
+					</div>
+				<% }); %>
+            </div><br>
+            <div class="jumbotron" style="background-color: rgba(180,190,200,0.68);">
+				<h2><strong>INCOMPLETE INCOMING CHALLENGES :</strong></h2><br>
+				<% incoming.forEach(function(ch){ %>
+					<a href="/<%= currentUser._id %>/mychallenges/existing/<%= ch._id %>" class="row btn btn-block btn-default">
+						<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+							<h3 style="text-align: right;"><strong><%= ch.byName %></strong></h3>
+							<h4 style="text-align: right;"><strong><%= ch.scoreBy %></strong></h4>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+							<h2 style="text-align: center;"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span></h2>
+						</div>
+						<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+							<h3 style="text-align: left;"><strong><%= ch.againstName %></strong></h3>
+						</div>
+					</a>
+				<% }); %>
+            </div><br>
+		</div>
+		<div class="col-lg-1"></div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!--
+    <h6 id="<%= currentUser._id %>">.</h6>
+    <h1>Create new CHALLENGE :</h1>
+    <a href="/<%= currentUser._id %>/mychallenges">Go back</a>
+    <hr>
+    <br>
+    <% users.forEach(function(user){ %>
+        <!--<a href="/<%= currentUser._id %>/mychallenges/<%= user._id %>" class="btn btn-large btn-default"><%= user.username %></a><br>-->
+        <!--
+        <% if(!user._id.equals(currentUser._id)){ %>
+            <button class="users btn btn-large btn-default" id="<%= user._id %>"><%= user.username %></button>
+        <% } %>
+    <% }); %>
+    <hr>
+    <button class="btn btn-large btn-success" id="submitUser">Confirm and Continue</button>
+        -->
+    
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a href="/home" class="navbar-brand"><span class="glyphicon glyphicon-king" aria-hidden="true"></span> PANTOMATH</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="#">About</a></li>
+                    <li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Users</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+    
+                    <% if(!currentUser){ %>
+                        <li><a href="/register"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Signup</a></li>
+                        <li><a href="/login"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
+                    <% } else { %>
+                        <li><a><b><%= currentUser.username %></b></a></li>
+                        <li><a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+                    <% } %>
+    
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <div id="ui" class="jumbotron">
+                    <div class="container">
+                        <div class="col-lg-1">
+                            <a class="btn btn-small btn-info" id="back" href="/<%= currentUser._id %>/mychallenges">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Go Back
+                            </a>
+                        </div>
+                    </div><hr>
+                    <h3>Okay...!! <strong><%= currentUser.username %></strong></h3>
+                    <h3><strong>Select your OPPONENT...</strong></h3>
+                </div>
+                <div class="well">
+                    <% users.forEach(function(user){ %>
+                        <!--<a href="/<%= currentUser._id %>/mychallenges/<%= user._id %>" class="btn btn-large btn-default"><%= user.username %></a><br>-->
+                        <% if(!user._id.equals(currentUser._id)){ %>
+                            <div class="users btn btn-lg btn-block btn-default" id="<%= user._id %>">
+                                <h3><strong><%= user.username %></strong></h3>
+                                <h4><i style="color: brown;">Rating : <strong><%= user.rating %></strong></i></h4>
+                            </div>
+                        <% } %>
+                    <% }); %>
+                    <hr>
+                    <button class="btn btn-lg btn-block btn-success" id="submitUser">Confirm and Continue</button>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <h6 id="<%= currentUser._id %>">.</h6>
+    
+    <script type="text/javascript">
+        //alert("xx");
+        var myId = document.getElementsByTagName("h6")[0].id;
+        var arr = document.getElementsByClassName("users");
+        //alert(arr.length);
+        //console.log(arr.length);
+        
+        var index = -1;
+        function fxn()
+        {
+            let arr = document.getElementsByClassName("users");
+            //alert("before : "+this.activated);
+            this.activated = !(this.activated);
+            this.style.backgroundColor = "rgb(160,200,220)";
+            if(index != (-1)){
+                arr[index].activated = !(arr[index].activated);
+                arr[index].style.backgroundColor = "white";
+            }
+            let j;
+            for(j=0; j<arr.length; j++)
+            {
+                if(arr[j].textContent===this.textContent)
+                {
+                    index = j;
+                    break;
+                }
+            }
+            //alert("after : "+this.activated);
+        }
+        function fxnConfirm()
+        {
+            let arr = document.getElementsByClassName("users");
+            alert("Okay... u selected:\n"+arr[index].textContent);
+
+            let url = "/"+myId+"/mychallenges/"+arr[index].id;
+            let req = new Request(url, {
+                method: "GET",
+                headers: new Headers()
+            });
+            fetch(req)
+                .then(function(){
+                    console.log("Okay...!!");
+                    window.location.replace(url);
+                })
+                .catch(function(){
+                    console.log("Not Okay...!!");
+                });
+        }
+        let i;
+        for(i=0; i<arr.length; i++){
+            let id = arr[i].id;
+            arr[i].activated = false;
+            //alert("xxx");
+            arr[i].addEventListener("click", fxn);
+            /*let req = new Request(url, {
+                method: "GET",
+                headers: new Headers()
+            });
+            
+
+            fetch(req)
+                .then(function(){
+                    console.log("Okay...!!");
+                    window.location.replace(url);
+                })
+                .catch(function(){
+                    console.log("Not Okay...!!");
+                });*/
+        }
+        var sub = document.getElementById("submitUser");
+        sub.addEventListener("click", fxnConfirm);
+    </script>
+</body>
+</html>
