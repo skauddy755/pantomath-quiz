@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -69,21 +70,23 @@
 			    </button>
 				<a href="/home" class="navbar-brand"><span class="glyphicon glyphicon-king" aria-hidden="true"></span> PANTOMATH</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="#">About</a></li>
-				<li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Users</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="#">About</a></li>
+					<li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Users</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
 
-				<% if(!currentUser){ %>
-					<li><a href="/register"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Signup</a></li>
-					<li><a href="/login"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
-				<% } else { %>
-					<li><a><b><%= currentUser.username %></b></a></li>
-					<li><a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
-				<% } %>
+					<% if(!currentUser){ %>
+						<li><a href="/register"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Signup</a></li>
+						<li><a href="/login"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
+					<% } else { %>
+						<li><a><b><%= currentUser.username %></b></a></li>
+						<li><a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+					<% } %>
 
-			</ul>
+				</ul>
+			</div>
 		</div>
 	</nav>
     <div class="container">
